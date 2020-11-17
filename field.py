@@ -6,7 +6,7 @@ class Field:
                 (29.5 * 30, 10.5 * 30)]  # newest positions of the players in the field
 
     win = GraphWin("Soccer Game", 930,
-                   660)  # open a drawing window named Soccer Game with a width of 930 and length of 630
+                   630)  # open a drawing window named Soccer Game with a width of 930 and length of 630
     win.setBackground(color="green")
 
     def __init__(self):
@@ -25,25 +25,7 @@ class Field:
         gate1.draw(self.win)
         gate2.draw(self.win)
 
-
-
     @classmethod
     def add_item(cls, func):  # add new object like the players sign(circle) into the drawing window(win)
         cls.win.addItem(func)
-        # cls.win.getMouse()
-        # cls.win.autoflush=True
-
-
-    def start_game_sign(self):
-        for i in range(3,0,-1):
-            message=Text(Point(15.5*30,21.5*30), i )
-            message.setSize(18)
-            message.draw(self.win)
-            time.sleep(0.8)
-            message.undraw()
-        message=Text(Point(15.5*30,21.5*30),"START")
-        message.setSize(18)
-        message.draw(self.win)
-        time.sleep(1)
-        message.undraw()
-
+        cls.win.getMouse()

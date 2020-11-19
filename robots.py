@@ -1,7 +1,9 @@
 import random
-from graphics import *
-from ball import *
+
 from field import *
+from ball import *
+import time
+from math import hypot,sqrt
 
 ######################  Robot class  ###################
 
@@ -9,24 +11,33 @@ class Robot(Field):
     moves = [(0, -30), (0, 30), (-30, 0), (30, 0)]  # the moves which the players can have
 
     def __init__(self):
-        self.charge = random.randint(250, 500)  # get a random charge to the player
+        self.charge = random.randint(1,2)  # get a random charge to the player
+
 
 
     def move_robot(self):
-        self.direction = random.choice(self.moves)
-        while ((self.pos[0] + self.direction[0], self.pos[1] + self.direction[1]) in self.full_pos) or (self.pos[0] +self.direction[0]) < 15 or (self.pos[0] + self.direction[0]) > (30.5 * 30) or (self.pos[1] + \
-                self.direction[1]) < 15 or (self.pos[1] + self.direction[1]) > (20.5 * 30):     # check if the selected pos is empty and not going out the field
-            self.direction = random.choice(self.moves)  # if the selected pos is full then select another direction
+        if self.charge>0:
+            self.direction = random.choice(self.moves)
+            while ((self.pos[0] + self.direction[0], self.pos[1] + self.direction[1]) in self.full_pos) or (self.pos[0] +self.direction[0]) < 15 or (self.pos[0] + self.direction[0]) > (30.5 * 30) or (self.pos[1] + \
+                    self.direction[1]) < 15 or (self.pos[1] + self.direction[1]) > (20.5 * 30):     # check if the selected pos is empty and not going out the field
+                self.direction = random.choice(self.moves)  # if the selected pos is full then select another direction
 
-        self.player.move(self.direction[0], self.direction[1])  # move the player into the new pos based on direction
-        self.new_pos = (self.player.getCenter().x, self.player.getCenter().y)
-        self.full_pos.remove(self.pos)
-        self.full_pos.append(self.new_pos)
-        self.pos = self.new_pos
-        self.win.getMouse()
+            self.player.move(self.direction[0], self.direction[1])  # move the player into the new pos based on direction
+            self.new_pos = (self.player.getCenter().x, self.player.getCenter().y)
 
-    def shoot(self):
-        self.shoot_power=random.randint(1,3)
+
+
+            self.full_pos.remove(self.pos)
+            self.full_pos.append(self.new_pos)
+            self.pos = self.new_pos
+            self.charge-=1
+        else:
+            self.player.undraw()
+            left_message=Text(Point(15.5*30,21.5*30),"the {0} team player left the game".format(self.color))
+            left_message.draw(self.win)
+            time.sleep(3)
+            left_message.undraw()
+
 
         
 
@@ -57,7 +68,6 @@ class Halfback2(Halfback1):  # the second halfback of the team
         elif color=="blue":
             self.pos = (20.5 * 30, 17.5 * 30)
 
-
 #####################  Forwards classes ####################################
 
 class Forward(Halfback1):  # the forward of the team
@@ -68,7 +78,6 @@ class Forward(Halfback1):  # the forward of the team
             self.pos = (18.5 * 30, 10.5 * 30)
         elif color=="blue":
             self.pos = (12.5 * 30, 10.5 * 30)
-
 
 ####################  Goalers classes ###################################
 
@@ -100,7 +109,7 @@ class Goaler(Halfback1):  # goaler of the  team
         self.full_pos.remove(self.pos)
         self.full_pos.append(self.new_pos)
         self.pos = self.new_pos
-        self.win.getMouse()
+
 
 
 

@@ -4,6 +4,7 @@ from ball import Ball
 
 
 class Team(Robot, Ball):
+
     """
     Calculate team goals and Move the rebels of a team
     Atribut:list_robot,color, goal number
@@ -14,7 +15,10 @@ class Team(Robot, Ball):
         self.list_robots = list_robots
         self.color = color
         self.goal = 0
-
+        if self.color=="red":
+            self.direction="left"
+        else:
+            self.direction="right"
     def Calculate_goal(self):
         # Calculate team goals
         if self.color == "red":

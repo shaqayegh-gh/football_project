@@ -32,6 +32,7 @@ class Robot(Field):
 
     def shoot(self):
         self.shoot_power = random.randint(1, 3)
+        if se
 
 
 #########################  first Halfbacks classes ###############################

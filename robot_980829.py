@@ -29,7 +29,7 @@ class Robot(Field):
         self.full_pos[self.color].append(self.new_pos)
         self.pos = self.new_pos
         self.win.getMouse()
-        if 0<= abs(dist(self.new_pos,self.pos))<=1:
+        if 0<= abs(dist(self.new_pos,self.ball_pos))<=1:
             self.shoot()
 
     def shoot(self):
@@ -108,7 +108,7 @@ class Goaler(Halfback1):  # goaler of the  team
         self.full_pos[self.color].append(self.new_pos)
         self.pos = self.new_pos
         self.win.getMouse()
-        if 0<= abs(dist(self.new_pos,self.pos))<=1:
+        if 0<= abs(dist(self.new_pos,self.ball_pos))<=1:
             self.shoot()
 
 

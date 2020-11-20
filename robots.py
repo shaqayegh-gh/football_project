@@ -38,6 +38,13 @@ class Robot(Field):
             time.sleep(3)
             left_message.undraw()
 
+            def shoot(self):
+                if self.color == "red":  # the red team should shoot to the right
+                    self.shoot_power = (random.randrange(30, 4 * 30, 30), random.randrange(-60, 60, 30))
+                elif self.color == "blue":  # the blue team should shoot to the left
+                    self.shoot_power = (random.randrange(-30, -4 * 30, -30), random.randrange(-60, 60, 30))
+                self.move_ball(self.shoot_power[0], self.shoot_power[1])
+
 
         
 

@@ -4,6 +4,7 @@ from field import *
 from math import hypot, sqrt
 
 
+
 class Game:
     def __init__(self):
         self.game_field = Field()  # create the field of the game

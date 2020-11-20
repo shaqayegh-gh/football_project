@@ -2,6 +2,7 @@ import logging
 from robots import *
 
 
+
 class Team (Ball,Robot):
     def __init__(self,color):
         super(Team, self).__init__()

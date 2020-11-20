@@ -1,9 +1,7 @@
 import random
-
 from field import *
 from ball import *
 import time
-from math import hypot,sqrt
 
 ######################  Robot class  ###################
 
@@ -11,8 +9,7 @@ class Robot(Field):
     moves = [(0, -30), (0, 30), (-30, 0), (30, 0)]  # the moves which the players can have
 
     def __init__(self):
-        self.charge = random.randint(1,2)  # get a random charge to the player
-
+        self.charge = random.randint(20,40)  # get a random charge to the player
 
 
     def move_robot(self):
@@ -25,21 +22,18 @@ class Robot(Field):
             self.player.move(self.direction[0], self.direction[1])  # move the player into the new pos based on direction
             self.new_pos = (self.player.getCenter().x, self.player.getCenter().y)
 
-
-
             self.full_pos.remove(self.pos)
             self.full_pos.append(self.new_pos)
             self.pos = self.new_pos
+
             self.charge-=1
         else:
             self.player.undraw()
             left_message=Text(Point(15.5*30,21.5*30),"the {0} team player left the game".format(self.color))
             left_message.draw(self.win)
-            time.sleep(3)
+            time.sleep(2)
             left_message.undraw()
 
-
-        
 
 #########################  first Halfbacks classes ###############################
 
@@ -56,6 +50,13 @@ class Halfback1(Robot):  # the first halfback of the  team
         self.player = Circle(Point(self.pos[0], self.pos[1]), 10)
         self.player.setFill(color=self.color)
         self.add_item(self.player.draw(self.win))
+
+    def shoot(self):
+        if self.color=="red":       #the red team should shoot to the right
+            self.shoot_power=(random.choice([30,60,120,150]),random.choice([-30,30,-60,60]))
+        elif self.color=="blue":     #the blue team should shoot to the left
+            self.shoot_power=(random.choice([-30,-60,-120,-150]),random.choice([-30,30,-60,60]))
+        return self.shoot_power
 
 ####################### Second Halfbacks classes ###################################
 
@@ -75,6 +76,7 @@ class Forward(Halfback1):  # the forward of the team
         Robot.__init__(self)
         self.color = color
         if color == "red":
+            # self.pos = (18.5 * 30, 10.5 * 30)
             self.pos = (18.5 * 30, 10.5 * 30)
         elif color=="blue":
             self.pos = (12.5 * 30, 10.5 * 30)

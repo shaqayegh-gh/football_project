@@ -3,7 +3,7 @@ from graphics import *
 class Field:
     full_pos = [(10.5 * 30, 3.5 * 30), (20.5 * 30, 3.5 * 30), (10.5 * 30, 17.5 * 30), (20.5 * 30, 17.5 * 30),
                 (18.5 * 30, 10.5 * 30), (12.5 * 30, 10.5 * 30), (45, 10.5 * 30),
-                (29.5 * 30, 10.5 * 30)]  # newest positions of the players in the field
+                (29.5 * 30, 10.5 * 30),(465,315)]  # newest positions of the players in the field
 
     win = GraphWin("Soccer Game", 930,
                    660)  # open a drawing window named Soccer Game with a width of 930 and length of 630

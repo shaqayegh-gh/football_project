@@ -32,7 +32,6 @@ class Robot(Field):
 
     def shoot(self):
         self.shoot_power = random.randint(1, 3)
-        if se
 
 
 #########################  first Halfbacks classes ###############################
@@ -95,7 +94,7 @@ class Goaler(Halfback1):  # goaler of the  team
 
     def move_robot(self):  # movement of the goalers is just along the length of the gates
 
-        while (self.direction[0], self.direction[1]) in self.full_pos:
+        while (self.direction[0], self.direction[1]) in self.full_pos[self.color]:
             if self.color == "red":
                 self.direction = random.choice(self.red_goaler_pos)
             elif self.color == "blue":

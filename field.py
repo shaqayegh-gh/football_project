@@ -30,8 +30,6 @@ class Field:
     @classmethod
     def add_item(cls, func):  # add new object like the players sign(circle) into the drawing window(win)
         cls.win.addItem(func)
-        # cls.win.getMouse()
-        # cls.win.autoflush=True
 
 
     def start_game_sign(self):
@@ -46,4 +44,33 @@ class Field:
         message.draw(self.win)
         time.sleep(1)
         message.undraw()
+
+
+    def show_goals(self,x,color,goal):
+        if color=="red":
+            self.red_goal_message=Text(Point(x,21.5*30), goal )
+            self.red_goal_message.setSize(16)
+            self.red_goal_message.draw(self.win)
+        elif color == "blue":
+            self.blue_goal_message = Text(Point(x, 21.5 * 30), goal)
+            self.blue_goal_message.setSize(16)
+            self.blue_goal_message.draw(self.win)
+
+    def remove_gaols_showing(self,color):
+        if color == "red":
+            self.red_goal_message.undraw()
+        elif color == "blue":
+            self.blue_goal_message.undraw()
+
+
+    def scored_message(self,color):
+        msg = Text(Point(15.5 * 30, 21.5 * 30), "{} team scored. Goaaaaaal!".format(color))
+        msg.setSize(16)
+        msg.draw(self.win)
+        time.sleep(2)
+        msg.undraw()
+
+
+
+
 

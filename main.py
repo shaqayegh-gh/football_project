@@ -29,55 +29,65 @@ class Game:
 game1 = Game()
 # continue the game until all players' charge finishes
 while game1.check_charges():
-    num_of_players = 8
+    num_of_players = 6
     for team in [game1.blue_team, game1.red_team]:
-        # move each player of teams
-        for player in team.list_robots:
+        for goaler in [game1.red_team.goaler,game1.blue_team.goaler]:
+            goaler.move_robot()
+            time.sleep(float(6 / num_of_players / 50))
+            goaler.move_robot()
+
+        for player in team.list_robots:   # move each player of teams
+
             player.move_robot()
-            time.sleep(float(8/num_of_players))
             # remove player with charge < 0 from team
             if player.charge <= 0:  # check the charge of the robot
                 player.move_robot()
                 team.list_robots.remove(player)
                 num_of_players -= 1
-                logging.basicConfig(filename='footbaler_ball_log.log', filemode='w', format='%(asctime)s %(message)s')
-                logging.info("A robot was removed")
+                logging.basicConfig(filename='Robot_footballer.log', level=logging.INFO,
+                                    format='%(asctime)s _ %(levelname)s _ %(message)s')
+                logging.info('A robot was removed')
 
             # check if player can shot the ball
-            elif abs(player.pos[0] - game1.game_ball.ball_pos[0]) == 30 and player.pos[1] == game1.game_ball.ball_pos[1]:
-                time.sleep(0.1)
+            if abs(player.pos[0] - game1.game_ball.ball_pos[0]) == 30 and player.pos[1] == game1.game_ball.ball_pos[1]:
+                time.sleep(float(6/num_of_players/50))
 
                 (x, y) = player.shoot()         #check the ball pos and not going out of field
                 while (game1.game_ball.ball_pos[0] + x < 15 or game1.game_ball.ball_pos[0] + x > 30.5 * 30):
                     (x, y) = player.shoot()
                 game1.game_ball.move_ball(x, y)  # shoot and move the ball
-
-                goal_red = game1.red_team.calculate_goal()  # check if it's a goal
-                goal_blue = game1.blue_team.calculate_goal()
+                game1.red_team.calculate_goal()  # check if it's a goal
+                game1.blue_team.calculate_goal()
 
             elif abs(player.pos[1] - game1.game_ball.ball_pos[1]) == 30 and player.pos[0] == \
                     game1.game_ball.ball_pos[0]:
-                time.sleep(0.1)
+                time.sleep(float(6/num_of_players/50))
                 (x, y) = player.shoot() #check the ball pos and not going out of field
                 while (game1.game_ball.ball_pos[0] + x < 15 or game1.game_ball.ball_pos[0] + x > 30.5 * 30):
                     (x, y) = player.shoot()
                 game1.game_ball.move_ball(x, y)  # shoot and move the ball
-
-                goal_red = game1.red_team.calculate_goal()   # check if it's a goal
-                goal_blue = game1.blue_team.calculate_goal()
+                game1.red_team.calculate_goal()   # check if it's a goal
+                game1.blue_team.calculate_goal()
 
             elif hypot(player.pos[0] - game1.game_ball.ball_pos[0],
                        player.pos[1] - game1.game_ball.ball_pos[1]) == sqrt(2) * 30:
-                time.sleep(0.1)
+                time.sleep(float(6 / num_of_players / 50))
                 (x, y) = player.shoot() #check the ball pos and not going out of field
                 while (game1.game_ball.ball_pos[0] + x < 15 or game1.game_ball.ball_pos[0] + x > 30.5 * 30):
                     (x, y) = player.shoot()
                 game1.game_ball.move_ball(x, y)  # shoot and move the ball
+                game1.red_team.calculate_goal()   # check if it's a goal
+                game1.blue_team.calculate_goal()
 
-                goal_red = game1.red_team.calculate_goal()   # check if it's a goal
-                goal_blue = game1.blue_team.calculate_goal()
+            else :
+                time.sleep(float(6 / num_of_players / 50))
+
 
 # print game's result
 msg = Text(Point(15.5*30, 21.5*30), "Red Team {0} - {1} Blue Team".format(game1.red_team.goal, game1.blue_team.goal))
 msg.draw(game1.game_field.win)
-game1.game_field.win.getMouse()
+try:
+    game1.game_field.win.getMouse()
+    game1.game_field.win.close()
+except GraphicsError:
+    print("tha game ended")

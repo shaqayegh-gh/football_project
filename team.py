@@ -14,7 +14,7 @@ class Team (Ball,Robot):
         self.forward = Forward(self.color)
         self.goaler = Goaler(self.color)
 
-        self.list_robots=[self.halfback1,self.halfback2,self.forward,self.goaler]
+        self.list_robots=[self.halfback1,self.halfback2,self.forward]
 
         self.halfback1.manage()      # add the players to the field
         self.halfback2.manage()
@@ -28,8 +28,9 @@ class Team (Ball,Robot):
     def calculate_goal(self):
         # Calculate team goals
         if self.color == "red":
-            if  self.ball_pos[0] ==30.5*30 and 8.5*30 <= self.ball_pos[1] <= 12.5*30:
+            if  self.ball_pos[0] ==30.5*30 and 8.5*30 <= self.ball_pos[1] <= 12.5*30 :
                 self.goal += 1
+                print("gooooooooal")
                 self.remove_gaols_showing(self.color)
                 self.show_goals(45,self.color,self.goal)
                 logging.basicConfig(filename='Robot_footballer.log', level=logging.INFO,
@@ -46,6 +47,7 @@ class Team (Ball,Robot):
         if self.color == "blue":
             if self.ball_pos[0] == 15 and 8.5 * 30 <= self.ball_pos[1] <= 12.5 * 30:
                 self.goal += 1
+                print("gooooooooal")
                 self.remove_gaols_showing(self.color)
                 self.show_goals(29.5 * 30, self.color, self.goal)
                 logging.basicConfig(filename='Robot_footballer.log', level=logging.INFO,

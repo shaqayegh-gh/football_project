@@ -49,11 +49,11 @@ class Field:
 
     def show_goals(self,x,color,goal):
         if color=="red":
-            self.red_goal_message=Text(Point(x,21.5*30), goal )
+            self.red_goal_message=Text(Point(x,21.5*30), "RED : {}".format(goal) )
             self.red_goal_message.setSize(16)
             self.red_goal_message.draw(self.win)
         elif color == "blue":
-            self.blue_goal_message = Text(Point(x, 21.5 * 30), goal)
+            self.blue_goal_message = Text(Point(x, 21.5 * 30), "{} : BLUE".format(goal))
             self.blue_goal_message.setSize(16)
             self.blue_goal_message.draw(self.win)
 
@@ -70,6 +70,7 @@ class Field:
         msg.draw(self.win)
         time.sleep(2)
         msg.undraw()
+
 
 
 

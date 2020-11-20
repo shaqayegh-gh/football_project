@@ -1,5 +1,4 @@
 import random
-from field import *
 from ball import *
 import time
 
@@ -9,8 +8,7 @@ class Robot(Field):
     moves = [(0, -30), (0, 30), (-30, 0), (30, 0)]  # the moves which the players can have
 
     def __init__(self):
-        self.charge = random.randint(20,40)  # get a random charge to the player
-
+        self.charge = random.randint(500,1500)  # get a random charge to the player
 
     def move_robot(self):
         if self.charge>0:
@@ -53,9 +51,9 @@ class Halfback1(Robot):  # the first halfback of the  team
 
     def shoot(self):
         if self.color=="red":       #the red team should shoot to the right
-            self.shoot_power=(random.choice([30,60,120,150]),random.choice([-30,30,-60,60]))
+            self.shoot_power=(random.choice([30,60,120,150,180]),0)
         elif self.color=="blue":     #the blue team should shoot to the left
-            self.shoot_power=(random.choice([-30,-60,-120,-150]),random.choice([-30,30,-60,60]))
+            self.shoot_power=(random.choice([-30,-60,-120,-150,-180]),0)
         return self.shoot_power
 
 ####################### Second Halfbacks classes ###################################
@@ -84,8 +82,8 @@ class Forward(Halfback1):  # the forward of the team
 ####################  Goalers classes ###################################
 
 class Goaler(Halfback1):  # goaler of the  team
-    red_goaler_pos = [(45, 8.5 * 30), (45, 9.5 * 30), (45, 10.5 * 30), (45, 11.5 * 30), (45, 12.5 * 30)]
-    blue_goaler_pos = [(29.5 * 30, 8.5 * 30), (29.5 * 30, 9.5 * 30), (29.5 * 30, 10.5 * 30), (29.5 * 30, 11.5 * 30),
+    red_goaler_pos = [(45, 8.5 * 30), (45, 9.5 * 30), (45, 11.5 * 30), (45, 12.5 * 30)]
+    blue_goaler_pos = [(29.5 * 30, 8.5 * 30), (29.5 * 30, 9.5 * 30), (29.5 * 30, 11.5 * 30),
                   (29.5 * 30, 12.5 * 30)]
 
     def __init__(self,color):

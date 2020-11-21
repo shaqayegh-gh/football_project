@@ -12,6 +12,8 @@ class Ball(Field):
 
 
     def move_ball(self,x,y):
+        if (x,y) in self.full_pos:
+            x-=30
         self.ball.move(x,y)
         self.ball_new_pos=(self.ball.getCenter().x,self.ball.getCenter().y)
         self.full_pos.remove(self.ball_pos)

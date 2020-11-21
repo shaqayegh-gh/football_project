@@ -37,6 +37,9 @@ class Team (Ball,Robot):
                         robot.manage()
                     elif isinstance(robot,Goaler):
                         robot.manage()
+                return True
+            else:
+                return False
         if self.color == "blue":
             if self.ball_pos[0] == 15 and 8.5 * 30 <= self.ball_pos[1] <= 12.5 * 30:
                 self.goal += 1
@@ -52,4 +55,7 @@ class Team (Ball,Robot):
                         robot.manage()
                     elif isinstance(robot,Goaler):
                         robot.manage()
+                return True
+            else:
+                return False
 

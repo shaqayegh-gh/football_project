@@ -27,19 +27,27 @@ class Team (Ball,Robot):
                 self.goal += 1
                 logging.basicConfig(filename='footbaler_robot_log.log', format='%(asctime)s %(message)s')
                 logging.info('The red team scored a goal')
-                self.full_pos = [(10.5 * 30, 3.5 * 30), (20.5 * 30, 3.5 * 30), (10.5 * 30, 17.5 * 30),
-                                 (20.5 * 30, 17.5 * 30),
-                                 (18.5 * 30, 10.5 * 30), (12.5 * 30, 10.5 * 30), (45, 10.5 * 30),
-                                 (29.5 * 30, 10.5 * 30)]
-
+                for robot in self.list_robots:
+                    if isinstance(robot,Halfback1):
+                        robot.manage()
+                    elif isinstance(robot,Halfback2):
+                        robot.manage()
+                    elif isinstance(robot,Forward):
+                        robot.manage()
+                    elif isinstance(robot,Goaler):
+                        robot.manage()
         if self.color == "blue":
             if self.ball_pos[0] == 15 and 8.5 * 30 <= self.ball_pos[1] <= 12.5 * 30:
                 self.goal += 1
                 logging.basicConfig(filename='footbaler_robot_log.log', filemode='w', format='%(asctime)s %(message)s')
                 logging.info("The blue team scored a goal")
-                self.full_pos = [(10.5 * 30, 3.5 * 30), (20.5 * 30, 3.5 * 30), (10.5 * 30, 17.5 * 30),
-                                 (20.5 * 30, 17.5 * 30),
-                                 (18.5 * 30, 10.5 * 30), (12.5 * 30, 10.5 * 30), (45, 10.5 * 30),
-                                 (29.5 * 30, 10.5 * 30)]
-
+                for robot in self.list_robots:
+                    if isinstance(robot,Halfback1):
+                        robot.manage()
+                    elif isinstance(robot,Halfback2):
+                        robot.manage()
+                    elif isinstance(robot,Forward):
+                        robot.manage()
+                    elif isinstance(robot,Goaler):
+                        robot.manage()
 

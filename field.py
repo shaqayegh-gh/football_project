@@ -4,7 +4,7 @@ from graphics import *
 class Field:
     full_pos = [(10.5 * 30, 3.5 * 30), (20.5 * 30, 3.5 * 30), (10.5 * 30, 17.5 * 30), (20.5 * 30, 17.5 * 30),
                 (18.5 * 30, 10.5 * 30), (12.5 * 30, 10.5 * 30), (45, 10.5 * 30),
-                (29.5 * 30, 10.5 * 30),(465,315)]  # newest positions of the players in the field
+                (29.5 * 30, 10.5 * 30), (465, 315)]  # newest positions of the players in the field
 
     win = GraphWin("Soccer Game", 930,
                    660)  # open a drawing window named Soccer Game with a width of 930 and length of 630
@@ -26,30 +26,26 @@ class Field:
         gate1.draw(self.win)
         gate2.draw(self.win)
 
-
-
     @classmethod
     def add_item(cls, func):  # add new object like the players sign(circle) into the drawing window(win)
         cls.win.addItem(func)
 
-
     def start_game_sign(self):
-        for i in range(3,0,-1):
-            message=Text(Point(15.5*30,21.5*30), i )
+        for i in range(3, 0, -1):
+            message = Text(Point(15.5 * 30, 21.5 * 30), i)
             message.setSize(18)
             message.draw(self.win)
             time.sleep(0.8)
             message.undraw()
-        message=Text(Point(15.5*30,21.5*30),"START")
+        message = Text(Point(15.5 * 30, 21.5 * 30), "START")
         message.setSize(18)
         message.draw(self.win)
         time.sleep(1)
         message.undraw()
 
-
-    def show_goals(self,x,color,goal):
-        if color=="red":
-            self.red_goal_message=Text(Point(x,21.5*30), "RED : {}".format(goal) )
+    def show_goals(self, x, color, goal):
+        if color == "red":
+            self.red_goal_message = Text(Point(x, 21.5 * 30), "RED : {}".format(goal))
             self.red_goal_message.setSize(16)
             self.red_goal_message.draw(self.win)
         elif color == "blue":
@@ -57,22 +53,15 @@ class Field:
             self.blue_goal_message.setSize(16)
             self.blue_goal_message.draw(self.win)
 
-    def remove_gaols_showing(self,color):
+    def remove_gaols_showing(self, color):
         if color == "red":
             self.red_goal_message.undraw()
         elif color == "blue":
             self.blue_goal_message.undraw()
 
-
-    def scored_message(self,color):
+    def scored_message(self, color):
         msg = Text(Point(15.5 * 30, 21.5 * 30), "{} team scored. Goaaaaaal!".format(color))
         msg.setSize(16)
         msg.draw(self.win)
         time.sleep(2)
         msg.undraw()
-
-
-
-
-
-

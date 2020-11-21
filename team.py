@@ -1,14 +1,12 @@
 import logging
-from time import sleep
 
 from robots import *
 
 
-class Team(Ball, Robot):
-    tyep_class = ["Halfback1", "Halfback2", "Forward", "Goaler"]
-    red_pos = [(10.5 * 30, 3.5 * 30), (10.5 * 30, 17.5 * 30), (18.5 * 30, 10.5 * 30), (45, 10.5 * 30)]
-    blue_pos = [(20.5 * 30, 3.5 * 30), (20.5 * 30, 17.5 * 30), (12.5 * 30, 10.5 * 30), (29.5 * 30, 10.5 * 30)]
-    i=3
+class Team(Ball, Robot,Field):
+    tyep_class = ["Halfback1", "Halfback2", "Forward"]
+    red_pos = [(10.5 * 30, 3.5 * 30), (10.5 * 30, 17.5 * 30), (18.5 * 30, 10.5 * 30)]
+    blue_pos = [(20.5 * 30, 3.5 * 30), (20.5 * 30, 17.5 * 30), (12.5 * 30, 10.5 * 30)]
 
     def __init__(self, color):
         super(Team, self).__init__()
@@ -34,6 +32,10 @@ class Team(Ball, Robot):
             if ball_X == 30.5 * 30 and 8.5 * 30 <= ball_Y <= 12.5 * 30:
                 # The red team scored a goal
                 self.goal += 1
+                print("golered")
+                for robot in self.list_robots:
+                    if robot.__dir__()=="Goaler":
+                        self.list_robots.remove(robot)
                 logging.basicConfig(filename='Robot_footballer.log', level=logging.INFO,
                                     format='%(asctime)s _ %(levelname)s _ %(message)s')
                 logging.info('The red team scored a goal')
@@ -41,25 +43,41 @@ class Team(Ball, Robot):
                 for robot in self.list_robots:
                     # Reset the position of the players after the team scores. Based on team color and
                     # (Halfback1,Halfback2,Forward,Goaler)
-                    for type, red,blue in zip(self.tyep_class, self.red_pos, self.blue_pos):
-                        sleep(self.i)
+                    for type, red_position,blue_position in zip(Team.tyep_class, Team.red_pos, Team.blue_pos):
                         if robot.__dir__() == type and robot.color == "red":
                             try:
-                                robot.new_pos = (45, 10.5 * 30)
-                                index = self.full_pos.index(robot.pos)
-                                self.full_pos.insert(index, red)
+                                robot.move_robot(red_position[0],red_position[1])
+                                # index = self.full_pos.index(robot.pos)
+                                # self.full_pos.insert(index, red_position)
+                                # robot.pos=red_position
+                                # robot.move(red_position[0],red_position[1])
+                                print("1",robot.pos)
+
 
                             except ValueError:
-                                self.full_pos.append(red)
+
+                                # self.full_pos.append(red_position)
+                                # robot.pos = red_position
+                                robot.move_robot(red_position[0], red_position[1])
+                                print("2",robot.pos)
+
+
 
                         elif robot.__dir__() == type and robot.color == "blue":
                             try:
-                                index = self.full_pos.index(robot.pos)
-                                self.full_pos.insert(index, blue)
+                                # index = self.full_pos.index(robot.pos)
+                                # self.full_pos.insert(index, blue_position)
+                                # robot.pos=blue_position
+                                robot.move_robot(blue_position[0], blue_position[1])
+                                print("3",robot.pos)
+
+
 
                             except ValueError:
-                                self.full_pos.append(blue)
-                        self.i-=0.5
+                                # self.full_pos.append(blue_position)
+                                # robot.pos = blue_position
+                                robot.move_robot(blue_position[0], blue_position[1])
+                                print("4",robot.pos)
 
                     return True
 
@@ -74,24 +92,34 @@ class Team(Ball, Robot):
                 self.goal += 1
                 for robot in self.list_robots:
                     # Reset the position of the players after the team scores. Based on team color and(Halfback1,Halfback2,Forward,Goaler)
-                    for type, red, blue in zip(self.tyep_class, self.red_pos, self.blue_pos):
+                    for type, red_position, blue_position in zip(Team.tyep_class, Team.red_pos, Team.blue_pos):
                         if robot.__dir__() == type and robot.color == "red":
                             try:
-                                robot.new_pos = (45, 10.5 * 30)
-                                index = self.full_pos.index(robot.pos)
-                                self.full_pos.insert(index, red)
+                                # index = self.full_pos.index(robot.pos)
+                                # self.full_pos.insert(index, red_position)
+                                # robot.pos = red_position
+                                robot.move_robot(red_position[0], red_position[1])
+                                print("5",robot.pos)
 
                             except ValueError:
-                                self.full_pos.append(red)
+                                # self.full_pos.append(red_position)
+                                # robot.pos = red_position
+                                robot.move_robot(red_position[0],red_position[1])
+                                print("6",robot.pos)
 
                         elif robot.__dir__() == type and robot.color == "blue":
                             try:
-                                index = self.full_pos.index(robot.pos)
-                                self.full_pos.insert(index, blue)
+                                # index = self.full_pos.index(robot.pos)
+                                # self.full_pos.insert(index, blue_position)
+                                # robot.pos = blue_position
+                                robot.move_robot(blue_position[0], blue_position[1])
+                                print("7",robot.pos)
 
                             except ValueError:
-                                self.full_pos.append(blue)
-
+                                # self.full_pos.append(blue_position)
+                                # robot.pos = blue_position
+                                robot.move_robot(blue_position[0], blue_position[1])
+                                print("8",robot.pos)
 
                 return True
             else:

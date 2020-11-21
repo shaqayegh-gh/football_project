@@ -13,7 +13,7 @@ class Game:
         self.red_team = Team("red")  # create the red team of the game
         # start the game
         self.game_field.start_game_sign()
-        time.sleep(1)
+
 
     # check if there is any player with charge > 0
     def check_charges(self):
@@ -57,10 +57,9 @@ while game1.check_charges():
                     if red_goal:
                         game1.game_ball.move_ball(456,315)
 
-                        time.sleep(1)
+
                     if blue_goal:
                         game1.game_ball.move_ball(456,315)
-                        time.sleep(1)
 
                 elif abs(player.pos[1] - game1.game_ball.ball_pos[1]) == 30 and player.pos[0] == \
                         game1.game_ball.ball_pos[0]:
@@ -73,10 +72,10 @@ while game1.check_charges():
                     blue_goal = game1.blue_team.calculate_goal(game1.game_ball.ball_pos[0], game1.game_ball.ball_pos[1])
                     if red_goal:
                         game1.game_ball.move_ball(456,315)
-                        time.sleep(1)
+
                     if blue_goal:
                         game1.game_ball.move_ball(456,315)
-                        time.sleep(1)
+
 
                 elif hypot(player.pos[0] - game1.game_ball.ball_pos[0],
                            player.pos[1] - game1.game_ball.ball_pos[1]) == sqrt(2) * 30:
@@ -90,11 +89,11 @@ while game1.check_charges():
                     if red_goal:
                         game1.game_ball.move_ball(456,315)
 
-                        time.sleep(1)
+
                     if blue_goal:
                         game1.game_ball.move_ball(456,315)
 
-                        time.sleep(1)
+
 
                 else:
                     time.sleep(float(6 / num_of_players / 50))

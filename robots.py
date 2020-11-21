@@ -11,19 +11,29 @@ class Robot(Field):
     def __init__(self):
         self.charge = random.randint(500, 1500)  # get a random charge to the player
 
-    def move_robot(self):
+    def move_robot(self,x=None,y=None):
         if self.charge > 0:
-            self.direction = random.choice(self.moves)
-            while ((self.pos[0] + self.direction[0], self.pos[1] + self.direction[1]) in self.full_pos) or (
-                    self.pos[0] + self.direction[0]) < 15 or (self.pos[0] + self.direction[0]) > (30.5 * 30) or (
-                    self.pos[1] + \
-                    self.direction[1]) < 15 or (self.pos[1] + self.direction[1]) > (
-                    20.5 * 30):  # check if the selected pos is empty and not going out the field
-                self.direction = random.choice(self.moves)  # if the selected pos is full then select another direction
+            if x==y==None:
+                self.direction = random.choice(self.moves)
+                while ((self.pos[0] + self.direction[0], self.pos[1] + self.direction[1]) in self.full_pos) or (
+                        self.pos[0] + self.direction[0]) < 15 or (self.pos[0] + self.direction[0]) > (30.5 * 30) or (
+                        self.pos[1] + \
+                        self.direction[1]) < 15 or (self.pos[1] + self.direction[1]) > (
+                        20.5 * 30):  # check if the selected pos is empty and not going out the field
+                    self.direction = random.choice(self.moves)  # if the selected pos is full then select another direction
 
-            self.player.move(self.direction[0],
+                self.player.move(self.direction[0],
+                                 self.direction[1])  # move the player into the new pos based on direction
+                self.new_pos = (self.player.getCenter().x, self.player.getCenter().y)
+            else:
+                print("S")
+                self.direction = (x, y)
+                print("x:{},y:{}".format(self.direction[0],self.direction[1]))
+                self.player.move(self.direction[0],
                              self.direction[1])  # move the player into the new pos based on direction
-            self.new_pos = (self.player.getCenter().x, self.player.getCenter().y)
+                # self.new_pos = (self.direction[0],self.direction[1])
+                self.new_pos = (self.player.getCenter().x, self.player.getCenter().y)
+                print("XX:{},YY:{}".format(self.new_pos[0],self.new_pos[1]))
 
             self.full_pos.remove(self.pos)
             self.full_pos.append(self.new_pos)

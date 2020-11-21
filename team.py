@@ -25,7 +25,8 @@ class Team (Ball,Robot):
         if self.color == "red":
             if self.ball_pos[0] == 30.5 * 30 and 8.5 * 30 <= self.ball_pos[1] <= 12.5 * 30:
                 self.goal += 1
-                logging.basicConfig(filename='footbaler_robot_log.log', format='%(asctime)s %(message)s')
+                logging.basicConfig(filename='Robot_footballer.log', level=logging.INFO,
+                                    format='%(asctime)s _ %(levelname)s _ %(message)s')
                 logging.info('The red team scored a goal')
                 for robot in self.list_robots:
                     if isinstance(robot,Halfback1):
@@ -39,8 +40,9 @@ class Team (Ball,Robot):
         if self.color == "blue":
             if self.ball_pos[0] == 15 and 8.5 * 30 <= self.ball_pos[1] <= 12.5 * 30:
                 self.goal += 1
-                logging.basicConfig(filename='footbaler_robot_log.log', filemode='w', format='%(asctime)s %(message)s')
-                logging.info("The blue team scored a goal")
+                logging.basicConfig(filename='Robot_footballer.log', level=logging.INFO,
+                                    format='%(asctime)s _ %(levelname)s _ %(message)s')
+                logging.info('The blue team scored a goal')
                 for robot in self.list_robots:
                     if isinstance(robot,Halfback1):
                         robot.manage()
